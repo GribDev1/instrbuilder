@@ -118,6 +118,20 @@ class SRSLockIn(SCPI):
             self._cmds['ch1_disp']._unconnected_val = b'1,0\r'
 
 
+class SRSDelayGenerator(SCPI):
+    def __init__(self,
+                 cmd_list,
+                 comm_handle,
+                 name='dg645',
+                 unconnected=False):
+        super().__init__(
+            cmd_list,
+            comm_handle,
+            name=name,
+            unconnected=unconnected
+        )
+
+
 class KeysightMultimeter(SCPI):
     def __init__(self,
                  cmd_list,

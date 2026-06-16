@@ -24,6 +24,9 @@ build
 build/
 build/*
 .coverage
+.venv/
+venv/
+env/
 
 # Distribution / packaging
 .Python
