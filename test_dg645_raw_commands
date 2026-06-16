@@ -1,0 +1,40 @@
+import pyvisa
+
+PORT = "ASRL4::INSTR"
+BAUD_RATE = 9600
+
+
+def main():
+    rm = pyvisa.ResourceManager()
+    dg = rm.open_resource(PORT)
+
+    dg.baud_rate = BAUD_RATE
+    dg.data_bits = 8
+    dg.parity = pyvisa.constants.Parity.none
+    dg.stop_bits = pyvisa.constants.StopBits.one
+    dg.flow_control = pyvisa.constants.ControlFlow.rts_cts
+    dg.timeout = 3000
+
+    dg.write_termination = "\r"
+    dg.read_termination = "\r"
+
+    print("Connected to", PORT)
+
+    # Identification query
+    print("*IDN? ->", dg.query("*IDN?").strip())
+
+    # Query B delay before changing anything
+    print("DLAY?3 ->", dg.query("DLAY?3").strip())
+
+    # Set channel A = T0 + 10 us
+    dg.write("DLAY 2, 0, 10e-6")
+    print("Set A = T0 + 10 us")
+
+    # Confirm A delay
+    print("DLAY?2 ->", dg.query("DLAY?2").strip())
+
+    dg.close()
+
+
+if __name__ == "__main__":
+    main()
