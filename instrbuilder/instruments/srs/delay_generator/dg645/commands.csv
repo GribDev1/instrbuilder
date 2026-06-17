@@ -3,9 +3,11 @@ id,*IDN?,*IDN?,TRUE,str,FALSE,none,None,Read the DG645 device identification str
 reset,*RST,,FALSE,none,TRUE,none,None,Reset the unit to default configurations.,interface,FALSE,,
 local,LCAL,,FALSE,none,TRUE,none,None,Return the DG645 to local/front-panel control.,interface,FALSE,,
 last_error,LERR,LERR?,TRUE,str,FALSE,none,None,Read the last error from the DG645 error queue.,status,FALSE,,
+adv_trig_en,ADVT {value},ADVT?,TRUE,bool,TRUE,bool,"[0,1]",Enable/query advanced triggering mode.,trigger,TRUE,1,0
 trigger,*TRG,,FALSE,none,TRUE,none,None,Trigger a delay cycle.,trigger,FALSE,,
 trigger_level,TLVL {value},TLVL?,TRUE,float,TRUE,float,"[-3.5,3.5]",Set/query external trigger threshold level in volts.,trigger,TRUE,1,0
 trigger_rate,TRAT {value},TRAT?,TRUE,float,TRUE,float,"[0.0001,10000000]",Set/query internal trigger rate in Hz.,trigger,TRUE,1,0
+trigger_holdoff,HOLD {value},HOLD?,TRUE,float,TRUE,float,"[0,2000]",Set/query trigger holdoff in seconds. Minimum time between successive triggers.,trigger,TRUE,1,0
 trigger_source,TSRC,TSRC?,TRUE,int,TRUE,int,"[0,6]",Set/query trigger source. 0=internal 1=external rising 2=external falling 3=single-shot external rising 4=single-shot external falling 5=single-shot 6=line.,trigger,TRUE,1,0
 delay,"DLAY {channel},{reference},{value}",DLAY?{channel},TRUE,str,TRUE,float,"[0,2000]", Set/query delay channel relative to a reference channel. Channels: 0=T0 1=T1 2=A 3=B 4=C 5=D 6=E 7=F 8=G 9=H.,delay,TRUE,3,1
 amplitude,"LAMP {output},{value}",LAMP?{output},TRUE,float,TRUE,float,"[0.5,5.0]",Set/query front panel output amplitude. Outputs: 0=T0 1=AB 2=CD 3=EF 4=GH,output,TRUE,2,1
