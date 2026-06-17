@@ -17,7 +17,7 @@ dg = open_by_name(name='dg645')
 dg.set("reset")
 
 print("A before:", dg.get("delay", configs={"channel": 2}))
-dg.set("delay", 6e-9, configs={"channel": 2, "reference": 0})
+dg.set("delay", 10e-9, configs={"channel": 2, "reference": 0})
 print("A after:", dg.get("delay", configs={"channel": 2}))
 
 # Last error gives the last error in the buffer. Error lookup table is in the DG645 Manual
@@ -31,6 +31,9 @@ dg.set("amplitude", 2.5, configs={"output": 0}) # T0
 dg.set("amplitude", 2.5, configs={"output": 1}) # AB
 
 dg.set("delay", 100e-9, configs={"channel": 3, "reference": 2}) # Use to modify delay band width (AB, CD, EF, GH)
+
+dg.set("adv_trig_en", 1) # Enables Advanced Triggering for Trigger Holdoff
+dg.set("trigger_holdoff", 136e-9) # Sets T1 (must be at least 25ns after longest programmed delay) (A=10ns, B=100ns, T >= A + B + 25ns =135ns)
 
 
 # Use to clear the error buffer
